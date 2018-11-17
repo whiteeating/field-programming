@@ -13,7 +13,7 @@ root.geometry('1300x800')
 root.resizable(False,False)
 root.flag = True
 root.start=False
-
+k='22'
 #背景
 
 canvas = tkinter.Canvas(root,
@@ -60,12 +60,13 @@ five.place(x=819,y=373,width=166,height=41)
 six = tkinter.Label(root,text='',bg='#920a0c',font = ("宋体", 25,"normal"),fg='#F4D267')
 six.place(x=819,y=414,width=166,height=41)
 
-winn=[]
 #滚动
 def switch():
     root.flag=True
     win=[]
-    win=draw_winner()
+    print(k)
+    win=draw_winner(k)
+    print(win)
     while root.flag:
         a=random.sample(win,6)
         first['text']=a[0]
@@ -82,6 +83,7 @@ def butStartClick():
    
     if(root.start==False):
        # win=draw_winner()
+        #print(k)
         btnStart['text']='停！'
         t=threading.Thread(target=switch)
         t.start()
@@ -100,17 +102,17 @@ typeEntered.place(x=920, y=505, height=30)
 typeEntered.focus() 
 ''' # 当程序运行时,光标默认会出现在该文本框中
 def rtnkey(event=None):
-   # print(e.get())
-    return e.get()
+    #print(e.get())
+    global k
+    k=e.get()
+    #return e.get()
 
 e = tkinter.StringVar()
 entry = ttk.Entry(root, validate='key', textvariable=e, width=30)
 entry.place(x=920, y=505, height=30)
 entry.focus()  # 当程序运行时,光标默认会出现在该文本框中
-k=''
 entry.bind('<Return>', rtnkey)
-k=rtnkey
-print(k)
+
 #下拉框
 numbermonth1 = tkinter.StringVar()
 monthChosen1 = ttk.Combobox(root, width=3, textvariable=numbermonth1, font=("宋体", 15,"normal"))

@@ -22,7 +22,7 @@ match1 = '系统消息'
 def matchh(value):
     match2=value
     return match2
-match2 = '#我要红包#'
+match2 = '2'
 l = [0]
 person =[]
 able_person = []
@@ -48,7 +48,7 @@ def select_1(value):
     f = fnew.readlines()
     l = [x for x in f]
     match2=value
-    print(match2)
+    print(match2+'ok1')
     for n in range(len(l)):
         if match2 in l[n]:
             filenew.write(l[n-1])
@@ -82,11 +82,14 @@ def select_QQ(value):
             able_person.append(x)
             x = str(x)
             qqNum.write(x+'\n')
+    os.remove('result.txt')
+    os.remove('final_result.txt')
+    os.remove('QQ_NUM.txt')
     return able_person
 if __name__ == "__main__":
     wipe_empty()
-    select_1()
-    select_QQ()
+    select_1(value)
+    select_QQ(value)
     
     
     
