@@ -82,9 +82,6 @@ def select_QQ(value):
             able_person.append(x)
             x = str(x)
             qqNum.write(x+'\n')
-    os.remove('result.txt')
-    os.remove('final_result.txt')
-    os.remove('QQ_NUM.txt')
     return able_person
 if __name__ == "__main__":
     wipe_empty()
