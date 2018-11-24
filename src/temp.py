@@ -2,8 +2,7 @@ import tkinter
 import random
 import threading
 import time
-from randomdraw import *
-from txt_solve import *
+from randomdraw import draw_winner
 from PIL import Image, ImageTk
 from tkinter import ttk
 #初始化窗口
@@ -14,6 +13,7 @@ root.resizable(False,False)
 root.flag = True
 root.start=False
 k='22'
+count = 0
 #背景
 
 canvas = tkinter.Canvas(root,
@@ -29,9 +29,14 @@ canvas.pack()
 #关键词 时间范围
 
 label1 = tkinter.Label(root, text="输入关键词：",bg='#920a0c',fg='#FFFFFF',font = ("宋体", 20,"normal"))
-label1.place(x=768, y=503)
+label1.place(x=768, y=480)
+
+label3 = tkinter.Label(root, text="输入抽奖个数：",bg='#920a0c',fg='#FFFFFF',font = ("宋体", 20,"normal"))
+label3.place(x=768, y=512)
+
 label2 = tkinter.Label(root, text="请选择时间范围：",bg='#920a0c',fg='#FFFFFF',font = ("宋体", 20,"normal"))
 label2.place(x=768, y=542)
+
 labelmonth1 = tkinter.Label(root, text="月",bg='#920a0c',fg='#FFFFFF',font = ("宋体", 20,"normal"))
 labelmonth1.place(x=820, y=581)
 labelday1 = tkinter.Label(root, text="日-",bg='#920a0c',fg='#FFFFFF',font = ("宋体", 20,"normal"))
@@ -60,15 +65,77 @@ five.place(x=819,y=373,width=166,height=41)
 six = tkinter.Label(root,text='',bg='#920a0c',font = ("宋体", 25,"normal"),fg='#F4D267')
 six.place(x=819,y=414,width=166,height=41)
 
+
 #滚动
 def switch():
     root.flag=True
-    win=[]
-    print(k)
-    win=draw_winner(k)
+    #win=[]
+    #print(k)
+    win=draw_winner(k,count)
     print(win)
-    while root.flag:
-        a=random.sample(win,6)
+    #a=random.sample(win,count)
+    if count == 1:
+        while root.flag:
+            win =random.sample(win,count)
+            first['text'] = win[0]
+            second['text']=''
+            third['text']=''
+            four['text']=''
+            five['text']=''
+            six['text']=''
+            time.sleep(0.03)
+    if count == 2:
+        while root.flag:
+            win =random.sample(win,count)
+            first['text']= win[0]
+            second['text']=win[1]
+            third['text']=''
+            four['text']=''
+            five['text']=''
+            six['text']=''
+            time.sleep(0.03)
+    if count == 3:
+        while root.flag:
+            win =random.sample(win,count)
+            first['text']= win[0]
+            second['text']=win[1]
+            third['text']=win[2]
+            four['text']=''
+            five['text']=''
+            six['text']=''
+            time.sleep(0.03)
+    if count == 4:
+        while root.flag:
+            win =random.sample(win,count)
+            first['text']= win[0]
+            second['text']=win[1]
+            third['text']=win[2]
+            four['text']=win[3]
+            five['text']=''
+            six['text']=''
+            time.sleep(0.03)
+    if count == 5:
+        while root.flag:
+            win =random.sample(win,count)
+            first['text']= win[0]
+            second['text']=win[1]
+            third['text']=win[2]
+            four['text']=win[3]
+            five['text']=win[4]
+            six['text']=''
+            time.sleep(0.03)
+    if count == 6:
+        while root.flag:
+            win =random.sample(win,count)
+            first['text']= win[0]
+            second['text']=win[1]
+            third['text']=win[2]
+            four['text']=win[3]
+            five['text']=win[4]
+            six['text']=win[5]
+            time.sleep(0.03)
+        """
+        a=random.sample(win,count)
         first['text']=a[0]
         second['text']=a[1]
         third['text']=a[2]
@@ -76,6 +143,8 @@ def switch():
         five['text']=a[4]
         six['text']=a[5]
         time.sleep(0.03)
+        """
+       
 
 
 #开始按钮
@@ -104,14 +173,24 @@ typeEntered.focus()
 def rtnkey(event=None):
     #print(e.get())
     global k
-    k=e.get()
+    k = e.get()
     #return e.get()
 
 e = tkinter.StringVar()
 entry = ttk.Entry(root, validate='key', textvariable=e, width=30)
-entry.place(x=920, y=505, height=30)
+entry.place(x=920, y=480, height=30)
 entry.focus()  # 当程序运行时,光标默认会出现在该文本框中
-entry.bind('<Return>', rtnkey)
+entry.bind('<Leave>',rtnkey)
+
+def numkey(event = None):
+    global count 
+    count = int(f.get())
+
+f = tkinter.StringVar()
+entry = ttk.Entry(root, validate='key', textvariable=f, width=10)
+entry.place(x=950, y=515, height=30)
+entry.focus()  # 当程序运行时,光标默认会出现在该文本框中
+entry.bind('<Leave>', numkey)
 
 #下拉框
 numbermonth1 = tkinter.StringVar()
